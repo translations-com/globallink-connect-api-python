@@ -1,0 +1,746 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	targetNamespace="http://dto.model.projectdirector.gs4tr.org/xsd"
+	xmlns:tns="http://dto.model.projectdirector.gs4tr.org/xsd"
+	elementFormDefault="qualified" attributeFormDefault="qualified"
+	xmlns:xmime="http://www.w3.org/2005/05/xmlmime">
+	<xs:import namespace="http://www.w3.org/2005/05/xmlmime"
+		schemaLocation="xmime.xsd" />
+	<xs:complexType name="Notification">
+		<xs:sequence>
+			<xs:element name="errorMessage" nillable="true" type="xs:string" />
+			<xs:element name="notificationDate" nillable="true" type="tns:Date" />
+			<xs:element name="notificationPriority" nillable="true"
+				type="tns:NotificationPriority" />
+			<xs:element name="notificationText" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NotificationPriority">
+		<xs:sequence>
+			<xs:element name="notificationPriorityName" nillable="true"
+				type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Announcement">
+		<xs:sequence>
+			<xs:element name="announcementText" nillable="true" type="xs:string" />
+			<xs:element name="date" nillable="true" type="tns:Date" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ContentMonitorPluginInfo">
+		<xs:sequence>
+			<xs:element name="pluginId" nillable="true" type="xs:string" />
+			<xs:element name="pluginName" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Date">
+		<xs:sequence>
+			<xs:element name="critical" type="xs:boolean" />
+			<xs:element name="date" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Document">
+		<xs:sequence>
+			<xs:element name="documentGroup" nillable="true"
+				type="tns:DocumentGroup" />
+			<xs:element name="documentInfo" nillable="true"
+				type="tns:DocumentInfo" />
+			<xs:element name="id" nillable="true" type="xs:string" />
+			<xs:element name="sourceLanguage" nillable="true" type="tns:Language" />
+			<xs:element name="sourceWordCount" nillable="true" type="xs:int" />
+			<xs:element name="ticket" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DocumentGroup">
+		<xs:sequence>
+			<xs:element name="classifier" nillable="true" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="documents"
+				nillable="true" type="tns:Document" />
+			<xs:element name="mimeType" nillable="true" type="xs:string" />
+			<xs:element name="submission" nillable="true" type="tns:Submission" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DocumentInfo">
+		<xs:sequence>
+			<xs:element name="childDocumentInfos" minOccurs="0"
+				maxOccurs="unbounded" nillable="true" type="tns:DocumentInfo" />
+			<xs:element name="clientIdentifier" nillable="true" type="xs:string" />
+			<xs:element name="dateRequested" nillable="true" type="tns:Date" />
+			<xs:element name="instructions" nillable="true" type="xs:string" />
+			<xs:element name="metadata" nillable="true" minOccurs="0"
+				maxOccurs="unbounded" type="tns:Metadata" />
+			<xs:element name="name" nillable="true" type="xs:string" />
+			<xs:element name="projectTicket" nillable="true" type="xs:string" />
+			<xs:element name="sourceLocale" nillable="true" type="xs:string" />
+			<xs:element name="submissionTicket" nillable="true" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="targetInfos"
+				nillable="true" type="tns:TargetInfo" />
+			<xs:element name="wordCount" nillable="true" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DocumentPagedList">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="elements"
+				nillable="true" type="tns:Document" />
+			<xs:element name="pagedListInfo" nillable="true"
+				type="tns:PagedListInfo" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="tasks"
+				nillable="true" type="tns:Task" />
+			<xs:element name="totalCount" nillable="true" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DocumentSearchRequest">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="projectTickets"
+				nillable="true" type="xs:string" />
+			<xs:element name="sourceLocaleId" nillable="true" type="xs:string" />
+			<xs:element name="submissionTicket" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DocumentTicket">
+		<xs:sequence>
+			<xs:element name="submissionTicket" nillable="true" type="xs:string" />
+			<xs:element name="ticketId" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="EntityTypeEnum">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="value" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FileFormatProfile">
+		<xs:sequence>
+			<xs:element name="configurable" nillable="true" type="xs:boolean" />
+			<xs:element name="isDefault" nillable="true" type="xs:boolean" />
+			<xs:element name="mimeType" nillable="true" type="xs:string" />
+			<xs:element name="pluginId" nillable="true" type="xs:string" />
+			<xs:element name="pluginName" nillable="true" type="xs:string" />
+			<xs:element name="profileName" nillable="true" type="xs:string" />
+			<xs:element name="targetWorkflowDefinition" nillable="true"
+				type="tns:WorkflowDefinition" />
+			<xs:element name="ticket" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FileFormatProgressData">
+		<xs:sequence>
+			<xs:element name="dateCompleted" nillable="true" type="tns:Date" />
+			<xs:element name="fileCount" type="xs:long" />
+			<xs:element name="fileFormatName" nillable="true" type="xs:string" />
+			<xs:element name="fileProgressData" nillable="true"
+				type="tns:FileProgressData" />
+			<xs:element name="jobTicket" nillable="true" type="xs:string" />
+			<xs:element name="workflowDueDate" nillable="true" type="tns:Date" />
+			<xs:element name="workflowStatus" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FileProgressData">
+		<xs:sequence>
+			<xs:element name="numberOfAvailableFiles" type="xs:int" />
+			<xs:element name="numberOfCanceledFiles" type="xs:int" />
+			<xs:element name="numberOfCompletedFiles" type="xs:int" />
+			<xs:element name="numberOfDeliveredFiles" type="xs:int" />
+			<xs:element name="numberOfFailedFiles" type="xs:int" />
+			<xs:element name="numberOfInProcessFiles" type="xs:int" />
+			<xs:element name="overallProgressPercent" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="FuzzyTmStatistics">
+		<xs:sequence>
+			<xs:element name="fuzzyName" nillable="true" type="xs:string" />
+			<xs:element name="wordCount" nillable="true" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ItemFolderEnum">
+		<xs:sequence>
+			<xs:element name="value" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ItemStatusEnum">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="value" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Metadata">
+		<xs:sequence>
+			<xs:element name="key" nillable="true" type="xs:string" />
+			<xs:element name="value" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Language">
+		<xs:sequence>
+			<xs:element name="locale" nillable="true" type="xs:string" />
+			<xs:element name="value" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LanguageDirection">
+		<xs:sequence>
+			<xs:element name="sourceLanguage" nillable="true" type="tns:Language" />
+			<xs:element name="targetLanguage" nillable="true" type="tns:Language" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LanguageDirectionModel">
+		<xs:sequence>
+			<xs:element name="dateCompleted" nillable="true" type="tns:Date" />
+			<xs:element name="fileCount" type="xs:long" />
+			<xs:element minOccurs="0" maxOccurs="unbounded"
+				name="fileFormatProgressData" nillable="true" type="tns:FileFormatProgressData" />
+			<xs:element name="fileProgress" nillable="true"
+				type="tns:FileProgressData" />
+			<xs:element name="sourceLanguage" nillable="true" type="tns:Language" />
+			<xs:element name="targetLanguage" nillable="true" type="tns:Language" />
+			<xs:element name="workflowDueDate" nillable="true" type="tns:Date" />
+			<xs:element name="workflowStatus" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Organization">
+		<xs:sequence>
+			<xs:element name="availableTasks" nillable="true" type="xs:integer" />
+			<xs:element name="parentOrganization" nillable="true"
+				type="tns:Organization" />
+			<xs:element name="organizationInfo" nillable="true"
+				type="tns:OrganizationInfo" />
+			<xs:element name="tasks" minOccurs="0" maxOccurs="unbounded"
+				nillable="true" type="tns:Task" />
+			<xs:element name="ticket" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="OrganizationInfo">
+		<xs:sequence>
+			<xs:element name="name" nillable="true" type="xs:string" />
+			<xs:element name="ticket" nillable="true" type="xs:string" />
+			<xs:element name="currencyCode" nillable="true" type="xs:string" />
+			<xs:element name="domain" nillable="true" type="xs:string" />
+			<xs:element name="theme" nillable="true" type="xs:string" />
+			<xs:element name="enabled" nillable="true" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PagedListInfo">
+		<xs:sequence>
+			<xs:element name="index" nillable="true" type="xs:int" />
+			<xs:element name="indexesSize" nillable="true" type="xs:int" />
+			<xs:element name="size" nillable="true" type="xs:int" />
+			<xs:element name="sortDirection" nillable="true" type="xs:string" />
+			<xs:element name="sortProperty" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Phase">
+		<xs:sequence>
+			<xs:element name="dateEnded" nillable="true" type="tns:Date" />
+			<xs:element name="dueDate" nillable="true" type="tns:Date" />
+			<xs:element name="name" nillable="true" type="xs:string" />
+			<xs:element name="status" nillable="true" type="tns:ItemStatusEnum" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PreviewResult">
+		<xs:sequence>
+			<xs:element name="message" nillable="true" type="xs:string" />
+			<xs:element name="repositoryItem" nillable="true"
+				type="tns:RepositoryItem" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Priority">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string" />
+			<xs:element name="value" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>
+						0 - LOW priority
+						1 - NORMAL priority
+						2 - HIGH
+						priority
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Project">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="announcements"
+				nillable="true" type="tns:Announcement" />
+			<xs:element name="contentMonitorPluginInfo" nillable="true"
+				type="tns:ContentMonitorPluginInfo" />
+			<xs:element name="defaultTargetWorkflowDefinition"
+				nillable="true" type="tns:WorkflowDefinition" />
+			<xs:element name="defaultTargetWorkflowDefinitionTicket"
+				nillable="true" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="fileFormatProfiles"
+				nillable="true" type="tns:FileFormatProfile" />
+			<xs:element minOccurs="0" maxOccurs="unbounded"
+				name="includeSubmissionNameInLocalizationKit" nillable="true" type="xs:boolean" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="metadata"
+				nillable="true" type="tns:Metadata" />
+			<xs:element name="organizationName" nillable="true" type="xs:string" />
+			<xs:element name="projectCustomFieldConfiguration"
+				minOccurs="0" maxOccurs="unbounded" nillable="true"
+				type="tns:ProjectCustomFieldConfiguration" />
+			<xs:element name="projectInfo" nillable="true" type="tns:ProjectInfo" />
+			<xs:element minOccurs="0" maxOccurs="unbounded"
+				name="projectLanguageDirections" nillable="true"
+				type="tns:ProjectLanguageDirection" />
+			<xs:element name="ticket" nillable="true" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="workflowDefinitions"
+				nillable="true" type="tns:WorkflowDefinition" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProjectInfo">
+		<xs:sequence>
+			<xs:element name="clientIdentifier" nillable="true" type="xs:string" />
+			<xs:element name="defaultJobWorkflowDefinitionTicket"
+				nillable="true" type="xs:string" />
+			<xs:element name="defaultSubmissionWorkflowDefinitionTicket"
+				nillable="true" type="xs:string" />
+			<xs:element name="defaultTargetWorkflowDefinitionTicket"
+				nillable="true" type="xs:string" />
+			<xs:element name="enabled" nillable="true" type="xs:boolean" />
+			<xs:element name="name" nillable="true" type="xs:string" />
+			<xs:element name="shortCode" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProjectLanguage">
+		<xs:sequence>
+			<xs:element name="customLocaleCode" nillable="true" type="xs:string" />
+			<xs:element name="localeCode" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProjectLanguageDirection">
+		<xs:sequence>
+			<xs:element name="sourceLanguage" nillable="true" type="tns:Language" />
+			<xs:element name="targetLanguage" nillable="true" type="tns:Language" />
+			<xs:element name="default" nillable="true" type="xs:boolean" />
+			<xs:element name="frequent" nillable="true" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProjectAClient">
+		<xs:sequence>
+			<xs:element name="name" nillable="true" type="xs:string" />
+			<xs:element name="ticket" nillable="true" type="xs:string" />
+			<xs:element name="enabled" nillable="true" type="xs:boolean" />
+			<xs:element name="parentOrganization" nillable="true"
+				type="tns:Organization" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RepositoryItem">
+		<xs:sequence>
+			<xs:annotation>
+				<xs:documentation>
+					If not using MTOM, received file needs to be
+					decoded with program
+					language specific base64 decoder
+				</xs:documentation>
+			</xs:annotation>
+			<xs:element name="data" nillable="true" type="xmime:base64Binary" />
+			<xs:element name="resourceInfo" nillable="true"
+				type="tns:ResourceInfo" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ResourceInfo">
+		<xs:sequence>
+			<xs:element name="classifier" nillable="true" type="xs:string" />
+			<xs:element name="clientIdentifier" nillable="true" type="xs:string" />
+			<xs:element name="description" nillable="true" type="xs:string" />
+			<xs:element name="encoding" nillable="true" type="xs:string" />
+			<xs:element name="md5Checksum" nillable="true" type="xs:string" />
+			<xs:element name="mimeType" nillable="true" type="xs:string" />
+			<xs:element name="name" nillable="true" type="xs:string" />
+			<xs:element name="path" nillable="true" type="xs:string" />
+			<xs:element name="resourceInfoId" nillable="true" type="xs:long" />
+			<xs:element name="size" nillable="true" type="xs:long" />
+			<xs:element name="type" nillable="true" type="tns:ResourceType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ResourceType">
+		<xs:sequence>
+			<xs:element name="value" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>
+						0 - TRANSLATABLE
+						1 - REFERENCE
+						2 - SOURCE
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Submission">
+		<xs:sequence>
+			<xs:element name="alerts" nillable="true" type="tns:Notification"
+				minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="availableTasks" nillable="true" type="xs:integer" />
+			<xs:element name="dateArchived" nillable="true" type="tns:Date" />
+			<xs:element name="dateCompleted" nillable="true" type="tns:Date" />
+			<xs:element name="dateCreated" nillable="true" type="tns:Date" />
+			<xs:element name="dateEstimated" nillable="true" type="tns:Date" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="documents"
+				nillable="true" type="tns:Document" />
+			<xs:element name="dueDate" nillable="true" type="tns:Date" />
+			<xs:element name="id" nillable="true" type="xs:string" />
+			<xs:element name="owner" nillable="true" type="xs:string" />
+			<xs:element name="project" nillable="true" type="tns:Project" />
+			<xs:element name="status" nillable="true" type="tns:ItemStatusEnum" />
+			<xs:element name="submissionInfo" nillable="true"
+				type="tns:SubmissionInfo" />
+			<xs:element name="submitterFullNames" nillable="true"
+				minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+			<xs:element name="ticket" nillable="true" type="xs:string" />
+			<xs:element name="workflowDefinition" nillable="true"
+				type="tns:WorkflowDefinition" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubmissionInfo">
+		<xs:sequence>
+			<xs:element name="additionalCosts" nillable="true" type="xs:string" />
+			<xs:element name="autoStartChilds" nillable="true" type="xs:boolean" />
+			<xs:element name="claimScope" nillable="true"
+				type="tns:ClaimScopeEnum" />
+			<xs:element name="clientIdentifier" nillable="true" type="xs:string" />
+			<xs:element name="dateRequested" nillable="true" type="tns:Date" />
+			<xs:element name="internalNotes" nillable="true" type="xs:string" />
+			<xs:element name="metadata" nillable="true" minOccurs="0"
+				maxOccurs="unbounded" type="tns:Metadata" />
+			<xs:element name="name" nillable="true" type="xs:string" />
+			<xs:element name="officeName" nillable="true" type="xs:string" />
+			<xs:element name="paClientTicket" nillable="true" type="xs:string">
+				<xs:annotation>
+					<xs:documentation>Do not use this, for TDC purporses only
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="paJobNumber" nillable="true" type="xs:string" />
+			<xs:element name="priority" nillable="true" type="tns:Priority" />
+			<xs:element name="projectTicket" nillable="true" type="xs:string" />
+			<xs:element name="revenue" nillable="true" type="xs:double" />
+			<xs:element name="submissionBackground" nillable="true"
+				type="xs:string" />
+			<xs:element name="submissionCustomFields" minOccurs="0"
+				maxOccurs="unbounded" nillable="true" type="tns:SubmissionCustomFields" />
+			<xs:element name="submitters" nillable="true" minOccurs="0"
+				maxOccurs="unbounded" type="xs:string" />
+			<xs:element name="workflowDefinitionTicket" nillable="true"
+				type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubmissionPagedList">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="elements"
+				nillable="true" type="tns:Submission" />
+			<xs:element name="pagedListInfo" nillable="true"
+				type="tns:PagedListInfo" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="tasks"
+				nillable="true" type="tns:Task" />
+			<xs:element name="totalCount" nillable="true" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SimpleSubmissionSearchModel">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="alerts"
+				nillable="true" type="tns:Notification" />
+			<xs:element name="availableTasks" nillable="true" type="xs:long" />
+			<xs:element name="budgetStatus" nillable="true" type="xs:int" />
+			<xs:element name="claimScope" nillable="true"
+				type="tns:ClaimScopeEnum" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="customFields"
+				nillable="true" type="xs:string" />
+			<xs:element name="date" nillable="true" type="tns:Date" />
+			<xs:element name="dateArchived" nillable="true" type="tns:Date" />
+			<xs:element name="dateCompleted" nillable="true" type="tns:Date" />
+			<xs:element name="dateStarted" nillable="true" type="tns:Date" />
+			<xs:element name="dueDate" nillable="true" type="tns:Date" />
+			<xs:element name="fileCount" type="xs:long" />
+			<xs:element name="fileProgress" nillable="true"
+				type="tns:FileProgressData" />
+			<xs:element name="gate" nillable="true" type="xs:byte" />
+			<xs:element name="id" nillable="true" type="xs:string" />
+			<xs:element name="instructions" nillable="true" type="xs:string" />
+			<xs:element name="officeName" nillable="true" type="xs:string" />
+			<xs:element name="owner" maxOccurs="unbounded" minOccurs="0"
+				nillable="true" type="tns:UserData" />
+			<xs:element name="paClientName" nillable="true" type="xs:string" />
+			<xs:element name="parentSubmissionName" nillable="true"
+				type="xs:string" />
+			<xs:element name="parentTicket" nillable="true" type="xs:string" />
+			<xs:element name="pmNotes" nillable="true" type="xs:string" />
+			<xs:element name="priority" nillable="true" type="xs:string" />
+			<xs:element name="projectName" nillable="true" type="xs:string" />
+			<xs:element name="projectTicket" nillable="true" type="xs:string" />
+			<xs:element name="quote" nillable="true" type="xs:byte" />
+			<xs:element name="reserved" nillable="true" type="xs:boolean" />
+			<xs:element name="sourceLanguage" nillable="true" type="xs:string" />
+			<xs:element name="status" nillable="true" type="tns:ItemStatusEnum" />
+			<xs:element name="submissionBackground" nillable="true"
+				type="xs:string" />
+			<xs:element name="submissionName" nillable="true" type="xs:string" />
+			<xs:element name="submitterFullName" maxOccurs="unbounded"
+				minOccurs="0" nillable="true" type="tns:UserData" />
+			<xs:element name="ticket" nillable="true" type="xs:string" />
+			<xs:element name="wordCount" nillable="true" type="xs:long" />
+			<xs:element name="workflowDueDate" nillable="true" type="tns:Date" />
+			<xs:element name="workflowStatus" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubmissionSearchModelPagedList">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="elements"
+				nillable="true" type="tns:SimpleSubmissionSearchModel" />
+			<xs:element name="pagedListInfo" nillable="true"
+				type="tns:PagedListInfo" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="tasks"
+				nillable="true" type="tns:Task" />
+			<xs:element name="totalCount" nillable="true" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubmissionSearchRequest">
+		<xs:sequence>
+			<xs:element name="folder" nillable="true" type="tns:ItemFolderEnum" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="projectTickets"
+				nillable="true" type="xs:string" />
+			<xs:element name="submissionDate" nillable="true" type="tns:Date" />
+			<xs:element name="submissionDueDate" nillable="true" type="tns:Date" />
+			<xs:element name="submissionName" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Target">
+		<xs:sequence>
+			<xs:element name="availableTasks" nillable="true" type="xs:long" />
+			<xs:element name="dateCompleted" nillable="true" type="tns:Date" />
+			<xs:element name="dateCreated" nillable="true" type="tns:Date" />
+			<xs:element name="dateEstimated" nillable="true" type="tns:Date" />
+			<xs:element name="document" nillable="true" type="tns:Document" />
+			<xs:element name="downloadThresholdTimeStamp" nillable="true"
+				type="tns:Date" />
+			<xs:element name="dueDate" nillable="true" type="tns:Date" />
+			<xs:element name="fileName" nillable="true" type="xs:string" />
+			<xs:element name="id" nillable="true" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="phases"
+				nillable="true" type="tns:Phase" />
+			<xs:element name="refPhase" nillable="true" type="tns:Phase" />
+			<xs:element name="sourceLanguage" nillable="true" type="tns:Language" />
+			<xs:element name="sourceWordCount" nillable="true" type="xs:int" />
+			<xs:element name="status" nillable="true" type="tns:ItemStatusEnum" />
+			<xs:element name="targetInfo" nillable="true" type="tns:TargetInfo" />
+			<xs:element name="targetLanguage" nillable="true" type="tns:Language" />
+			<xs:element name="targetWordCount" nillable="true" type="xs:int" />
+			<xs:element name="ticket" nillable="true" type="xs:string" />
+			<xs:element name="tmStatistics" nillable="true"
+				type="tns:TmStatistics" />
+			<xs:element name="workflowDefinition" nillable="true"
+				type="tns:WorkflowDefinition" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TargetInfo">
+		<xs:sequence>
+			<xs:element name="dateRequested" nillable="true" type="tns:Date" />
+			<xs:element name="encoding" nillable="true" type="xs:string" />
+			<xs:element name="instructions" nillable="true" type="xs:string" />
+			<xs:element name="metadata" nillable="true" minOccurs="0"
+				maxOccurs="unbounded" type="tns:Metadata" />
+			<xs:element name="priority" nillable="true" type="tns:Priority" />
+			<xs:element name="requestedDueDate" type="xs:long" />
+			<xs:element name="targetLocale" nillable="true" type="xs:string" />
+			<xs:element name="workflowDefinitionTicket" nillable="true"
+				type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TargetPagedList">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="elements"
+				nillable="true" type="tns:Target" />
+			<xs:element name="pagedListInfo" nillable="true"
+				type="tns:PagedListInfo" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="tasks"
+				nillable="true" type="tns:Task" />
+			<xs:element name="totalCount" nillable="true" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TargetSearchRequest">
+		<xs:sequence>
+			<xs:element name="dateCreated" nillable="true" type="tns:Date" />
+			<xs:element name="folder" nillable="true" type="tns:ItemFolderEnum" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="projectTickets"
+				nillable="true" type="xs:string" />
+			<xs:element name="sourceLocaleId" nillable="true" type="xs:string" />
+			<xs:element name="submissionTicket" nillable="true" type="xs:string" />
+			<xs:element name="targetLocaleId" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Task">
+		<xs:sequence>
+			<xs:element name="groupName" nillable="true" type="xs:string" />
+			<xs:element name="selectStyle" nillable="true" type="xs:int" />
+			<xs:element name="taskId" nillable="true" type="xs:long" />
+			<xs:element name="taskName" nillable="true" type="xs:string" />
+			<xs:element name="weight" nillable="true" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TmStatistics">
+		<xs:sequence>
+			<xs:element name="fuzzyRepetitionsWordCount1" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyRepetitionsWordCount10" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyRepetitionsWordCount2" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyRepetitionsWordCount3" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyRepetitionsWordCount4" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyRepetitionsWordCount5" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyRepetitionsWordCount6" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyRepetitionsWordCount7" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyRepetitionsWordCount8" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyRepetitionsWordCount9" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyWordCount1" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyWordCount10" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyWordCount2" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyWordCount3" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyWordCount4" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyWordCount5" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyWordCount6" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyWordCount7" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyWordCount8" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="fuzzyWordCount9" nillable="true"
+				type="tns:FuzzyTmStatistics" />
+			<xs:element name="goldWordCount" nillable="true" type="xs:int" />
+			<xs:element name="noMatchWordCount" nillable="true" type="xs:int" />
+			<xs:element name="oneHundredMatchWordCount" nillable="true"
+				type="xs:int" />
+			<xs:element name="repetitionWordCount" nillable="true"
+				type="xs:int" />
+			<xs:element name="totalWordCount" nillable="true" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WorkflowDefinition">
+		<xs:sequence>
+			<xs:element name="description" nillable="true" type="xs:string" />
+			<xs:element name="name" nillable="true" type="xs:string" />
+			<xs:element name="ticket" nillable="true" type="xs:string" />
+			<xs:element name="type" nillable="true" type="tns:EntityTypeEnum" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UserData">
+		<xs:sequence>
+			<xs:element name="email" nillable="true" type="xs:string" />
+			<xs:element name="name" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UserInfo">
+		<xs:sequence>
+			<xs:element name="accountNonExpired" nillable="true" type="xs:boolean" />
+			<xs:element name="accountNonLocked" nillable="true" type="xs:boolean" />
+			<xs:element name="adress" nillable="true" type="xs:string" />
+			<xs:element name="autoClaimMultipleTasks" nillable="true"
+				type="xs:boolean" />
+			<xs:element name="claimMultipleJobTasks" nillable="true"
+				type="xs:boolean" />
+			<xs:element name="credentialsNonExpired" nillable="true"
+				type="xs:boolean" />
+			<xs:element name="dateLastLogin" nillable="true" type="xs:dateTime" />
+			<xs:element name="department" nillable="true" type="xs:string" />
+			<xs:element name="emailAddress" nillable="true" type="xs:string" />
+			<xs:element name="emailNotification" nillable="true" type="xs:boolean" />
+			<xs:element name="enabled" nillable="true" type="xs:boolean" />
+			<xs:element name="fax" nillable="true" type="xs:string" />
+			<xs:element name="firstName" nillable="true" type="xs:string" />
+			<xs:element name="lastName" nillable="true" type="xs:string" />
+			<xs:element name="password" nillable="true" type="xs:string" />
+			<xs:element name="phone1" nillable="true" type="xs:string" />
+			<xs:element name="phone2" nillable="true" type="xs:string" />
+			<xs:element name="timeZone" nillable="true" type="xs:string" />
+			<xs:element name="userName" nillable="true" type="xs:string" />
+			<xs:element name="userType" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="TiUserInfo">
+		<xs:sequence>
+			<xs:element name="languageDirections" nillable="true"
+				minOccurs="0" maxOccurs="unbounded" type="tns:LanguageDirection" />
+			<xs:element name="organizationId" nillable="true" type="xs:long" />
+			<xs:element name="projectRoles" nillable="true" minOccurs="0"
+				maxOccurs="unbounded" type="xs:string" />
+			<xs:element name="projectTicket" nillable="true"
+				minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+			<xs:element name="systemRoles" nillable="true" minOccurs="0"
+				maxOccurs="unbounded" type="xs:string" />
+			<xs:element name="vendorId" nillable="true" type="xs:long" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ClaimScopeEnum">
+		<xs:sequence>
+			<xs:element name="name" nillable="true" type="xs:string" />
+			<xs:element name="value" nillable="true" type="xs:int">
+				<xs:annotation>
+					<xs:documentation>
+						0 - FILE
+						1 - BATCH
+						2 - LANGUAGE
+					</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ProjectCustomFieldConfiguration">
+		<xs:sequence>
+			<xs:element name="mandatory" nillable="true" type="xs:boolean" />
+			<xs:element name="name" nillable="true" type="xs:string" />
+			<xs:element name="type" nillable="true" type="xs:string" />
+			<xs:element name="values" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SubmissionCustomFields">
+		<xs:sequence>
+			<xs:element name="fieldName" nillable="true" type="xs:string" />
+			<xs:element name="fieldValue" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="UserProfile">
+		<xs:sequence>
+			<xs:element name="availableTasks" nillable="true" type="xs:int" />
+			<xs:element name="organizationName" nillable="true" type="xs:string" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="systemRoles"
+				nillable="true" type="tns:Role" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="tasks"
+				nillable="true" type="tns:Task" />
+			<xs:element name="ticket" nillable="true" type="xs:string" />
+			<xs:element name="userInfo" nillable="true" type="tns:UserInfo" />
+			<xs:element name="vendorName" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Role">
+		<xs:sequence>
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="policies"
+				nillable="true" type="tns:Policy" />
+			<xs:element name="roleId" nillable="true" type="xs:string" />
+			<xs:element name="roleType" nillable="true" type="tns:RoleTypeEnum" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="tasks"
+				nillable="true" type="tns:Task" />
+			<xs:element name="ticket" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RoleTypeEnum">
+		<xs:sequence>
+			<xs:element name="value" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Policy">
+		<xs:sequence>
+			<xs:element name="category" nillable="true" type="xs:string" />
+			<xs:element name="policyId" nillable="true" type="xs:string" />
+			<xs:element name="policyType" nillable="true" type="tns:RoleTypeEnum" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
