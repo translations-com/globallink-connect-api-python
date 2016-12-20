@@ -1,0 +1,9 @@
+url='http://gl-projectdirector.translations.com/PD'
+username='username'
+password='password'
+userAgent='glc.py'
+sourceLanguage='en-US'
+targetLanguages=['de-DE']
+project='PRO000001'
+fileFormatProfile='xml'
+submissionPrefix='glcpy_'

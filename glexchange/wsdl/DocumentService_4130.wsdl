@@ -7,11 +7,6 @@
 	xmlns:xmime="http://www.w3.org/2005/05/xmlmime" xmlns:ax225="http://dto.model.projectdirector.gs4tr.org/xsd"
 	targetNamespace="http://impl.services.service.ws.projectdirector.gs4tr.org">
 	<wsdl:documentation>DocumentService_4130</wsdl:documentation>
-	<wsdl:documentation>
-		In order to append client application name in PD log,
-		SOAP header has to contain "userAgent" property with client
-		application name.
-	</wsdl:documentation>
 	<!--SOAP header example - <commons:userAgent xmlns:commons="http://commons.ws.projectdirector.gs4tr.org">AppName</commons:userAgent> -->
 	<wsdl:types>
 		<xs:schema xmlns:ax226="http://dto.model.projectdirector.gs4tr.org/xsd"

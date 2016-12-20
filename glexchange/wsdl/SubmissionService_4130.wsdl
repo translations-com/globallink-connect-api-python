@@ -6,12 +6,6 @@
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
 	xmlns:xmime="http://www.w3.org/2005/05/xmlmime" targetNamespace="http://impl.services.service.ws.projectdirector.gs4tr.org">
 	<wsdl:documentation>SubmissionService_4130</wsdl:documentation>
-	<wsdl:documentation>
-		In order to append client application name in PD
-		log,
-		SOAP header has to contain "userAgent" property with client
-		application name.
-	</wsdl:documentation>
 	<!--SOAP header example - <commons:userAgent xmlns:commons="http://commons.ws.projectdirector.gs4tr.org">AppName</commons:userAgent> -->
 	<wsdl:types>
 		<xs:schema xmlns:ax234="http://dto.model.projectdirector.gs4tr.org/xsd"
@@ -397,7 +391,7 @@
 		</wsdl:operation>
 		<wsdl:operation name="checkDownloadDeliverableCollateral">
 			<wsdl:input message="ns:checkDownloadDeliverableCollateralRequest"
-				wsaw:Action="checkDownloadDeliverableCollateral" />
+				wsaw:Action="urn:checkDownloadDeliverableCollateral" />
 			<wsdl:output message="ns:checkDownloadDeliverableCollateralResponse"
 				wsaw:Action="urn:checkDownloadDeliverableCollateralResponse" />
 		</wsdl:operation>
@@ -463,7 +457,7 @@
 		</wsdl:operation>
 		<wsdl:operation name="uploadReference">
 			<wsdl:input message="ns:uploadReferenceRequest"
-				wsaw:Action="urn:uploadReferenceRequest" />
+				wsaw:Action="urn:uploadReference" />
 			<wsdl:output message="ns:uploadReferenceResponse"
 				wsaw:Action="urn:uploadReferenceResponse" />
 		</wsdl:operation>
