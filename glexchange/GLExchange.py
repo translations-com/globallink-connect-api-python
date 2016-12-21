@@ -47,6 +47,9 @@ class GLExchange:
 			self._connectionConfig.url = self._connectionConfig.url[:-1]
 		
 		path = os.path.dirname(os.path.abspath(__file__))
+		if path[0]=='/':
+			path = path[1:]
+                        
 		self._projectService = Client("file:///"+path+"/wsdl/ProjectService_4130.wsdl")
 		self._projectService.sd[0].service.setlocation(self._connectionConfig.url+"/services/ProjectService")
 		self._targetService = Client("file:///"+path+"/wsdl/TargetService_4130.wsdl")
