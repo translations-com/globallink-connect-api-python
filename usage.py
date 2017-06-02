@@ -1,5 +1,5 @@
 send = False
-retrieve=False
+retrieve=True
 if __name__ == "__main__":
 	from glexchange.GLExchange import GLExchange
 	import glexchange.model.ProjectDirectorConfig
@@ -30,7 +30,7 @@ if __name__ == "__main__":
 		
 		for file in os.listdir("resources/"+config.sourceLanguage):
 			document = glexchange.model.Document.PDDocument()
-			document.fileformat = "xml"
+			document.fileformat = config.fileFormatProfile
 			document.sourceLanguage = config.sourceLanguage
 			document.name = file
 			document.targetLanguages = config.targetLanguages
@@ -45,7 +45,8 @@ if __name__ == "__main__":
 	if retrieve:
 		import os
 		print "Starting retrieve"
-		targets = glx.getCompletedTargets (100)
+		project = glx.getProject(config.project)
+		targets = glx.getCompletedTargetsByProject (project, 100)
 		if len(targets)>0:
 			for target in targets:
 				data = glx.downloadTarget(target.ticket)
@@ -54,7 +55,10 @@ if __name__ == "__main__":
 					os.makedirs(directory)
 				with open(directory+target.documentName, 'w+') as f:
 					f.write(data)
-				print target.documentName + " [" + target.ticket + "] downloaded to "+directory+target.documentName
+				try:
+					print target.documentName  + " [" + target.ticket + "] downloaded to "+directory+target.documentName
+				except UnicodeEncodeError:
+					print "[Unprintable filename] [" + target.ticket + "] downloaded to "+directory
 				glx.sendDownloadConfirmation(target.ticket)
 		else:
 			print "No completed targets"

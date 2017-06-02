@@ -27,6 +27,15 @@
 			<xs:element name="date" nillable="true" type="tns:Date" />
 		</xs:sequence>
 	</xs:complexType>
+	<xs:complexType name="Batch">
+		<xs:sequence>
+			<xs:element name="name" nillable="true" type="xs:string" />
+			<xs:element name="targetLanguages" minOccurs="0"
+				maxOccurs="unbounded" nillable="true" type="xs:string" />
+			<xs:element name="workflowDefinition" nillable="true"
+				type="tns:WorkflowDefinition" />
+		</xs:sequence>
+	</xs:complexType>
 	<xs:complexType name="ContentMonitorPluginInfo">
 		<xs:sequence>
 			<xs:element name="pluginId" nillable="true" type="xs:string" />
@@ -192,6 +201,15 @@
 			<xs:element name="targetLanguage" nillable="true" type="tns:Language" />
 			<xs:element name="workflowDueDate" nillable="true" type="tns:Date" />
 			<xs:element name="workflowStatus" nillable="true" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="LanguagePhaseInfo">
+		<xs:sequence>
+			<xs:element name="phaseStartDate" nillable="true" type="tns:Date" />
+			<xs:element minOccurs="0" maxOccurs="unbounded" name="sourceFileList"
+				nillable="true" type="xs:string" />
+			<xs:element name="tmStatistics" nillable="true"
+				type="tns:TmStatistics" />
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="Organization">
@@ -368,6 +386,8 @@
 			<xs:element name="alerts" nillable="true" type="tns:Notification"
 				minOccurs="0" maxOccurs="unbounded" />
 			<xs:element name="availableTasks" nillable="true" type="xs:int" />
+			<xs:element name="batches" nillable="true" minOccurs="0"
+				maxOccurs="unbounded" type="tns:Batch" />
 			<xs:element name="dateArchived" nillable="true" type="tns:Date" />
 			<xs:element name="dateCompleted" nillable="true" type="tns:Date" />
 			<xs:element name="dateCreated" nillable="true" type="tns:Date" />
@@ -379,6 +399,7 @@
 			<xs:element name="owner" nillable="true" type="xs:string" />
 			<xs:element name="project" nillable="true" type="tns:Project" />
 			<xs:element name="status" nillable="true" type="tns:ItemStatusEnum" />
+			<xs:element name="submissionId" nillable="true" type="xs:long" />
 			<xs:element name="submissionInfo" nillable="true"
 				type="tns:SubmissionInfo" />
 			<xs:element name="submitterFullNames" nillable="true"
@@ -615,7 +636,8 @@
 				type="tns:FuzzyTmStatistics" />
 			<xs:element name="fuzzyWordCount9" nillable="true"
 				type="tns:FuzzyTmStatistics" />
-			<xs:element name="goldWordCount" nillable="true" type="xs:int" />
+			<xs:element name="inContextMatchWordCount" nillable="true"
+				type="xs:int" />
 			<xs:element name="noMatchWordCount" nillable="true" type="xs:int" />
 			<xs:element name="oneHundredMatchWordCount" nillable="true"
 				type="xs:int" />

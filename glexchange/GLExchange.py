@@ -48,20 +48,20 @@ class GLExchange:
 		
 		path = os.path.dirname(os.path.abspath(__file__))
 		if path[0]=='/':
-			path = path[1:]
-                        
-		self._projectService = Client("file:///"+path+"/wsdl/ProjectService_4130.wsdl")
-		self._projectService.sd[0].service.setlocation(self._connectionConfig.url+"/services/ProjectService")
-		self._targetService = Client("file:///"+path+"/wsdl/TargetService_4130.wsdl")
-		self._targetService.sd[0].service.setlocation(self._connectionConfig.url+"/services/TargetService")
-		self._documentService = Client("file:///"+path+"/wsdl/DocumentService_4130.wsdl")
-		self._documentService.sd[0].service.setlocation(self._connectionConfig.url+"/services/DocumentService")
-		self._submissionService = Client("file:///"+path+"/wsdl/SubmissionService_4130.wsdl")
-		self._submissionService.sd[0].service.setlocation(self._connectionConfig.url+"/services/SubmissionService")
-		self._userProfileService = Client("file:///"+path+"/wsdl/UserProfileService_4130.wsdl")
-		self._userProfileService.sd[0].service.setlocation(self._connectionConfig.url+"/services/UserProfile")
-		self._workflowService = Client("file:///"+path+"/wsdl/WorkflowService_4130.wsdl")
-		self._workflowService.sd[0].service.setlocation(self._connectionConfig.url+"/services/WorkflowService")
+                        path = path[1:]
+                
+		self._projectService = Client("file:///"+path+"/wsdl/ProjectService_4180.wsdl")
+		self._projectService.sd[0].service.setlocation(self._connectionConfig.url+"/services/ProjectService_4180")
+		self._targetService = Client("file:///"+path+"/wsdl/TargetService_4180.wsdl")
+		self._targetService.sd[0].service.setlocation(self._connectionConfig.url+"/services/TargetService_4180")
+		self._documentService = Client("file:///"+path+"/wsdl/DocumentService_4180.wsdl")
+		self._documentService.sd[0].service.setlocation(self._connectionConfig.url+"/services/DocumentService_4180")
+		self._submissionService = Client("file:///"+path+"/wsdl/SubmissionService_4180.wsdl")
+		self._submissionService.sd[0].service.setlocation(self._connectionConfig.url+"/services/SubmissionService_4180")
+		self._userProfileService = Client("file:///"+path+"/wsdl/UserProfileService_4180.wsdl")
+		self._userProfileService.sd[0].service.setlocation(self._connectionConfig.url+"/services/UserProfile_4180")
+		self._workflowService = Client("file:///"+path+"/wsdl/WorkflowService_4180.wsdl")
+		self._workflowService.sd[0].service.setlocation(self._connectionConfig.url+"/services/WorkflowService_4180")
 		self.__setHeaders()
 		
 	def __setHeaders(self):

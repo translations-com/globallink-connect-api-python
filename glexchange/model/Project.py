@@ -19,9 +19,10 @@ class PDProject:
 		
 		for externalLanguageDirection in externalProject.projectLanguageDirections:
 			self.languageDirections.append(LanguageDirection.PDLanguageDirection(externalLanguageDirection))
-			
-		for fileFormatProfile in externalProject.fileFormatProfiles:
-			self.fileFormats.append(fileFormatProfile.profileName)
+
+		if hasattr(externalProject, 'fileFormatProfiles') :
+                        for fileFormatProfile in externalProject.fileFormatProfiles:
+                                self.fileFormats.append(fileFormatProfile.profileName)
 			
 		if hasattr(externalProject, 'workflowDefinitions') :
 			for externalWorkflowDefinition in externalProject.workflowDefinitions:

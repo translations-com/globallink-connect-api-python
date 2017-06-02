@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<content-export preview-url="/material/foams-uls-advantages">
+	<meta>
+		<title>Foams-ULS-Advantages</title>
+		<submitter>john</submitter>
+	</meta>
+	<item pk="5849d23497d4dd086c25908c" type="Page">
+		<attribute content_id="56be0c11d64791fe6f8b45a4" base_id="56be0c11d64791fe6f8b45a4" variable="field_title" name="Title" size="60" type="text" translatable="yes" pk="586c30cd97d4dd4ab619ca74"><![CDATA[Foams - Advantages of ULS Technology]]></attribute><attribute content_id="56be0c11d64791fe6f8b45a4" base_id="56be0c11d64791fe6f8b45a4" variable="field_metadescription" name="Meta Description" type="text" size="160" translatable="yes" pk="586c30cd97d4dd4ab619ca75"><![CDATA[Universal Laser Systems technology provides several unique solutions for laser cutting, engraving, and marking of foams.]]></attribute><attribute content_id="56be0c11d64791fe6f8b45a4" base_id="56be0c11d64791fe6f8b45a4" variable="field_metakeywords" name="Meta Keywords" size="100" type="text" translatable="yes" pk="586c30cd97d4dd4ab619ca76"><![CDATA[Foams ULS Advantages]]></attribute><attribute content_id="57eae88f0454aa5d11078896" base_id="57eaea790454aa12451391b1_1" variable="field_active_Advantages" name="active_Advantages" size="255" type="text" translatable="yes" pk="57f2920d0454aa6bd31171bd"><![CDATA[active]]></attribute><attribute content_id="57eae88f0454aa5d11078896" base_id="57eae88f0454aa5d11078896" variable="field_Title" name="Title" size="255" type="text" translatable="yes" pk="5896928c97d4dd4719344f66"><![CDATA[Foams]]></attribute><attribute content_id="57eae88f0454aa5d11078896" base_id="57eae88f0454aa5d11078896" variable="field_Content" name="Content" type="textarea" translatable="yes" pk="5896928c97d4dd4719344f67"><![CDATA[<p>ULS Advantages for Laser Material Processing of Foams.</p>]]></attribute>
+	</item>
+</content-export>

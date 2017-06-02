@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:ns="http://impl.services.service.ws.projectdirector.gs4tr.org"
+	xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+	xmlns:ax21="http://dto.model.projectdirector.gs4tr.org/xsd"
+	xmlns:xmime="http://www.w3.org/2005/05/xmlmime" targetNamespace="http://impl.services.service.ws.projectdirector.gs4tr.org">
+	<wsdl:documentation>WorkflowService_4180</wsdl:documentation>
+	<wsdl:types>
+		<xs:schema xmlns:ax22="http://dto.model.projectdirector.gs4tr.org/xsd"
+			attributeFormDefault="qualified" elementFormDefault="qualified"
+			targetNamespace="http://impl.services.service.ws.projectdirector.gs4tr.org">
+			<xs:import namespace="http://dto.model.projectdirector.gs4tr.org/xsd"
+				schemaLocation="types.xsd" />
+			<xs:import namespace="http://www.w3.org/2005/05/xmlmime"
+				schemaLocation="xmime.xsd" />
+			<xs:element name="checkDownloadAction">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="workflowRequestTicket" nillable="false"
+							type="ax22:WorkflowRequestTicket" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="checkDownloadActionResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" nillable="true"
+							type="ax22:DownloadActionResult" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="checkUploadAction">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="workflowRequestTicket" nillable="false"
+							type="ax22:WorkflowRequestTicket" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="checkUploadActionResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" nillable="true"
+							type="ax22:UploadActionResult" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="claim">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="workflowRequest" nillable="false"
+							type="ax22:WorkflowRequest" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="claimResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" nillable="true" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="download">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="workflowRequest" nillable="false"
+							type="ax22:WorkflowRequest" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="downloadResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" nillable="true"
+							type="ax22:WorkflowRequestTicket" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="downloadPreview">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="workflowRequest" nillable="false"
+							type="ax22:WorkflowRequest" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="downloadPreviewResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" nillable="true"
+							type="ax22:WorkflowRequestTicket" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="findAvailableWorkflowInfosForClaim">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="limit" nillable="false" type="xs:int" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="findAvailableWorkflowInfosForClaimResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" nillable="true" maxOccurs="unbounded"
+							minOccurs="0" type="ax22:SubmissionWorkflowInfo" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="findAvailableWorkflowInfosForDownload">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="limit" nillable="false" type="xs:int" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="findAvailableWorkflowInfosForDownloadResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" nillable="true" maxOccurs="unbounded"
+							minOccurs="0" type="ax22:SubmissionWorkflowInfo" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element
+				name="findAvailableWorkflowInfosForDownloadBySubmissionTickets">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="submissionTickets" minOccurs="1"
+							maxOccurs="unbounded" nillable="false" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element
+				name="findAvailableWorkflowInfosForDownloadBySubmissionTicketsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" nillable="true" maxOccurs="unbounded"
+							minOccurs="0" type="ax22:SubmissionWorkflowInfo" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="upload">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="resourceInfo" nillable="false"
+							type="ax22:ResourceInfo" />
+						<xs:element name="data" nillable="false" type="xmime:base64Binary" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="uploadResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" nillable="true"
+							type="ax22:WorkflowRequestTicket" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="checkDownloadActionRequest">
+		<wsdl:part name="parameters" element="ns:checkDownloadAction" />
+	</wsdl:message>
+	<wsdl:message name="checkDownloadActionResponse">
+		<wsdl:part name="parameters" element="ns:checkDownloadActionResponse" />
+	</wsdl:message>
+	<wsdl:message name="checkUploadActionRequest">
+		<wsdl:part name="parameters" element="ns:checkUploadAction" />
+	</wsdl:message>
+	<wsdl:message name="checkUploadActionResponse">
+		<wsdl:part name="parameters" element="ns:checkUploadActionResponse" />
+	</wsdl:message>
+	<wsdl:message name="claimRequest">
+		<wsdl:part name="parameters" element="ns:claim" />
+	</wsdl:message>
+	<wsdl:message name="claimResponse">
+		<wsdl:part name="parameters" element="ns:claimResponse" />
+	</wsdl:message>
+	<wsdl:message name="downloadRequest">
+		<wsdl:part name="parameters" element="ns:download" />
+	</wsdl:message>
+	<wsdl:message name="downloadResponse">
+		<wsdl:part name="parameters" element="ns:downloadResponse" />
+	</wsdl:message>
+	<wsdl:message name="downloadPreviewRequest">
+		<wsdl:part name="parameters" element="ns:downloadPreview" />
+	</wsdl:message>
+	<wsdl:message name="downloadPreviewResponse">
+		<wsdl:part name="parameters" element="ns:downloadPreviewResponse" />
+	</wsdl:message>
+	<wsdl:message name="findAvailableWorkflowInfosForClaimRequest">
+		<wsdl:part name="parameters" element="ns:findAvailableWorkflowInfosForClaim" />
+	</wsdl:message>
+	<wsdl:message name="findAvailableWorkflowInfosForClaimResponse">
+		<wsdl:part name="parameters"
+			element="ns:findAvailableWorkflowInfosForClaimResponse" />
+	</wsdl:message>
+	<wsdl:message name="findAvailableWorkflowInfosForDownloadRequest">
+		<wsdl:part name="parameters" element="ns:findAvailableWorkflowInfosForDownload" />
+	</wsdl:message>
+	<wsdl:message name="findAvailableWorkflowInfosForDownloadResponse">
+		<wsdl:part name="parameters"
+			element="ns:findAvailableWorkflowInfosForDownloadResponse" />
+	</wsdl:message>
+	<wsdl:message
+		name="findAvailableWorkflowInfosForDownloadBySubmissionTicketsRequest">
+		<wsdl:part name="parameters"
+			element="ns:findAvailableWorkflowInfosForDownloadBySubmissionTickets" />
+	</wsdl:message>
+	<wsdl:message
+		name="findAvailableWorkflowInfosForDownloadBySubmissionTicketsResponse">
+		<wsdl:part name="parameters"
+			element="ns:findAvailableWorkflowInfosForDownloadBySubmissionTicketsResponse" />
+	</wsdl:message>
+	<wsdl:message name="uploadRequest">
+		<wsdl:part name="parameters" element="ns:upload" />
+	</wsdl:message>
+	<wsdl:message name="uploadResponse">
+		<wsdl:part name="parameters" element="ns:uploadResponse" />
+	</wsdl:message>
+	<wsdl:portType name="WorkflowServicePortType">
+		<wsdl:operation name="checkDownloadAction">
+			<wsdl:input message="ns:checkDownloadActionRequest"
+				wsaw:Action="urn:checkDownloadAction" />
+			<wsdl:output message="ns:checkDownloadActionResponse"
+				wsaw:Action="urn:checkDownloadActionResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="checkUploadAction">
+			<wsdl:input message="ns:checkUploadActionRequest"
+				wsaw:Action="urn:checkUploadAction" />
+			<wsdl:output message="ns:checkUploadActionResponse"
+				wsaw:Action="urn:checkUploadActionResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="claim">
+			<wsdl:input message="ns:claimRequest" wsaw:Action="urn:claim" />
+			<wsdl:output message="ns:claimResponse" wsaw:Action="urn:claimResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="download">
+			<wsdl:input message="ns:downloadRequest" wsaw:Action="urn:download" />
+			<wsdl:output message="ns:downloadResponse" wsaw:Action="urn:downloadResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="downloadPreview">
+			<wsdl:input message="ns:downloadPreviewRequest"
+				wsaw:Action="urn:downloadPreview" />
+			<wsdl:output message="ns:downloadPreviewResponse"
+				wsaw:Action="urn:downloadPreviewResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="findAvailableWorkflowInfosForClaim">
+			<wsdl:input message="ns:findAvailableWorkflowInfosForClaimRequest"
+				wsaw:Action="urn:findAvailableWorkflowInfosForClaim" />
+			<wsdl:output message="ns:findAvailableWorkflowInfosForClaimResponse"
+				wsaw:Action="urn:findAvailableWorkflowInfosForClaimResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="findAvailableWorkflowInfosForDownload">
+			<wsdl:input message="ns:findAvailableWorkflowInfosForDownloadRequest"
+				wsaw:Action="urn:findAvailableWorkflowInfosForDownload" />
+			<wsdl:output message="ns:findAvailableWorkflowInfosForDownloadResponse"
+				wsaw:Action="urn:findAvailableWorkflowInfosForDownloadResponse" />
+		</wsdl:operation>
+		<wsdl:operation
+			name="findAvailableWorkflowInfosForDownloadBySubmissionTickets">
+			<wsdl:input
+				message="ns:findAvailableWorkflowInfosForDownloadBySubmissionTicketsRequest"
+				wsaw:Action="urn:findAvailableWorkflowInfosForDownloadBySubmissionTickets" />
+			<wsdl:output
+				message="ns:findAvailableWorkflowInfosForDownloadBySubmissionTicketsResponse"
+				wsaw:Action="urn:findAvailableWorkflowInfosForDownloadBySubmissionTicketsResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="upload">
+			<wsdl:input message="ns:uploadRequest" wsaw:Action="urn:upload" />
+			<wsdl:output message="ns:uploadResponse" wsaw:Action="urn:uploadResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="WorkflowServiceSoap11Binding" type="ns:WorkflowServicePortType">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+			style="document" />
+		<wsdl:operation name="checkDownloadAction">
+			<soap:operation soapAction="urn:checkDownloadAction"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkUploadAction">
+			<soap:operation soapAction="urn:checkUploadAction"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="claim">
+			<soap:operation soapAction="urn:claim" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="download">
+			<soap:operation soapAction="urn:download" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="downloadPreview">
+			<soap:operation soapAction="urn:downloadPreview"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findAvailableWorkflowInfosForClaim">
+			<soap:operation soapAction="urn:findAvailableWorkflowInfosForClaim"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findAvailableWorkflowInfosForDownload">
+			<soap:operation soapAction="urn:findAvailableWorkflowInfosForDownload"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="findAvailableWorkflowInfosForDownloadBySubmissionTickets">
+			<soap:operation
+				soapAction="urn:findAvailableWorkflowInfosForDownloadBySubmissionTickets"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="upload">
+			<soap:operation soapAction="urn:upload" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="WorkflowServiceSoap12Binding" type="ns:WorkflowServicePortType">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+			style="document" />
+		<wsdl:operation name="checkDownloadAction">
+			<soap:operation soapAction="urn:checkDownloadAction"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkUploadAction">
+			<soap:operation soapAction="urn:checkUploadAction"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="claim">
+			<soap:operation soapAction="urn:claim" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="download">
+			<soap:operation soapAction="urn:download" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="downloadPreview">
+			<soap:operation soapAction="urn:downloadPreview"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findAvailableWorkflowInfosForClaim">
+			<soap:operation soapAction="urn:findAvailableWorkflowInfosForClaim"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findAvailableWorkflowInfosForDownload">
+			<soap:operation soapAction="urn:findAvailableWorkflowInfosForDownload"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="findAvailableWorkflowInfosForDownloadBySubmissionTickets">
+			<soap:operation
+				soapAction="urn:findAvailableWorkflowInfosForDownloadBySubmissionTickets"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="upload">
+			<soap:operation soapAction="urn:upload" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="WorkflowServiceHttpBinding" type="ns:WorkflowServicePortType">
+		<http:binding verb="POST" />
+		<wsdl:operation name="checkDownloadAction">
+			<http:operation location="WorkflowService_4180/checkDownloadAction" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="checkDownloadAction" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="checkDownloadAction" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="checkUploadAction">
+			<http:operation location="WorkflowService_4180/checkUploadAction" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="checkUploadAction" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="checkUploadAction" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="claim">
+			<http:operation location="WorkflowService_4180/claim" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="claim" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="claim" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="download">
+			<http:operation location="WorkflowService_4180/download" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="download" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="download" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="downloadPreview">
+			<http:operation location="WorkflowService_4180/downloadPreview" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="downloadPreview" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="downloadPreview" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findAvailableWorkflowInfosForClaim">
+			<http:operation
+				location="WorkflowService_4180/findAvailableWorkflowInfosForClaim" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="findAvailableWorkflowInfosForClaim" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="findAvailableWorkflowInfosForClaim" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findAvailableWorkflowInfosForDownload">
+			<http:operation
+				location="WorkflowService_4180/findAvailableWorkflowInfosForDownload" />
+			<wsdl:input>
+				<mime:content type="text/xml"
+					part="findAvailableWorkflowInfosForDownload" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml"
+					part="findAvailableWorkflowInfosForDownload" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation
+			name="findAvailableWorkflowInfosForDownloadBySubmissionTickets">
+			<http:operation
+				location="WorkflowService_4180/findAvailableWorkflowInfosForDownloadBySubmissionTickets" />
+			<wsdl:input>
+				<mime:content type="text/xml"
+					part="findAvailableWorkflowInfosForDownloadBySubmissionTickets" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml"
+					part="findAvailableWorkflowInfosForDownloadBySubmissionTickets" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="upload">
+			<http:operation location="WorkflowService_4180/upload" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="upload" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="upload" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="WorkflowService_4180">
+		<wsdl:port name="WorkflowServiceHttpSoap11Endpoint" binding="ns:WorkflowServiceSoap11Binding">
+			<soap:address
+				location="http://localhost/services/WorkflowService_4180.WorkflowServiceHttpSoap11Endpoint" />
+		</wsdl:port>
+		<wsdl:port name="WorkflowServiceHttpSoap12Endpoint" binding="ns:WorkflowServiceSoap12Binding">
+			<soap:address
+				location="http://localhost/services/WorkflowService_4180.WorkflowServiceHttpSoap12Endpoint" />
+		</wsdl:port>
+		<wsdl:port name="WorkflowServiceHttpEndpoint" binding="ns:WorkflowServiceHttpBinding">
+			<http:address
+				location="http://localhost/services/WorkflowService_4180.WorkflowServiceHttpEndpoint" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

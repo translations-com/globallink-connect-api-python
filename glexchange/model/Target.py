@@ -18,7 +18,7 @@ class PDTarget:
 		self.clientIdentifier = externalTarget.document.documentInfo.clientIdentifier
 		
 		if hasattr(externalTarget, 'tmStatistics'):
-			self.wordCount = WordCount.PDWordCount(externalTarget.tmStatistics.goldWordCount, externalTarget.tmStatistics.oneHundredMatchWordCount, externalTarget.tmStatistics.repetitionWordCount, externalTarget.tmStatistics.noMatchWordCount, externalTarget.tmStatistics.totalWordCount )
+			self.wordCount = WordCount.PDWordCount(externalTarget.tmStatistics)
 		
 		self.metadata = {}
 		if hasattr(externalTarget.targetInfo, 'metadata'):

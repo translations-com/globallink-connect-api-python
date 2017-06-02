@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:ns="http://impl.services.service.ws.projectdirector.gs4tr.org" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ax21="http://dto.model.projectdirector.gs4tr.org/xsd"
+	targetNamespace="http://impl.services.service.ws.projectdirector.gs4tr.org">
+	<wsdl:documentation>ProjectService_4180</wsdl:documentation>
+	<wsdl:types>
+		<xs:schema xmlns:ax22="http://dto.model.projectdirector.gs4tr.org/xsd"
+			attributeFormDefault="qualified" elementFormDefault="qualified"
+			targetNamespace="http://impl.services.service.ws.projectdirector.gs4tr.org">
+			<xs:import namespace="http://dto.model.projectdirector.gs4tr.org/xsd" schemaLocation="types.xsd" />
+			<xs:element name="findByTicket">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ticket" nillable="false" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="findByTicketResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" nillable="true" type="ax22:Project" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="findProjectByName">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="projectName" nillable="false" type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="findProjectByNameResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" nillable="true" type="ax22:Project" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="findProjectByShortCode">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="projectShortCode" nillable="false"
+							type="xs:string" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="findProjectByShortCodeResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" nillable="true" type="ax22:Project" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getUserProjects">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="isSubProjectIncluded" nillable="false"
+							type="xs:boolean" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="getUserProjectsResponse">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="return" maxOccurs="unbounded" minOccurs="0" type="ax21:Project"
+							nillable="true" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:schema>
+	</wsdl:types>
+	<wsdl:message name="findByTicketRequest">
+		<wsdl:part name="parameters" element="ns:findByTicket" />
+	</wsdl:message>
+	<wsdl:message name="findByTicketResponse">
+		<wsdl:part name="parameters" element="ns:findByTicketResponse" />
+	</wsdl:message>
+	<wsdl:message name="findProjectByNameRequest">
+		<wsdl:part name="parameters" element="ns:findProjectByName" />
+	</wsdl:message>
+	<wsdl:message name="findProjectByNameResponse">
+		<wsdl:part name="parameters" element="ns:findProjectByNameResponse" />
+	</wsdl:message>
+	<wsdl:message name="findProjectByShortCodeRequest">
+		<wsdl:part name="parameters" element="ns:findProjectByShortCode" />
+	</wsdl:message>
+	<wsdl:message name="findProjectByShortCodeResponse">
+		<wsdl:part name="parameters" element="ns:findProjectByShortCodeResponse" />
+	</wsdl:message>
+	<wsdl:message name="getUserProjectsRequest">
+		<wsdl:part name="parameters" element="ns:getUserProjects" />
+	</wsdl:message>
+	<wsdl:message name="getUserProjectsResponse">
+		<wsdl:part name="parameters" element="ns:getUserProjectsResponse" />
+	</wsdl:message>
+	<wsdl:portType name="ProjectServicePortType">
+		<wsdl:operation name="findByTicket">
+			<wsdl:input message="ns:findByTicketRequest" wsaw:Action="urn:findByTicket" />
+			<wsdl:output message="ns:findByTicketResponse"
+				wsaw:Action="urn:findByTicketResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="findProjectByName">
+			<wsdl:input message="ns:findProjectByNameRequest"
+				wsaw:Action="urn:findProjectByName" />
+			<wsdl:output message="ns:findProjectByNameResponse"
+				wsaw:Action="urn:findProjectByNameResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="findProjectByShortCode">
+			<wsdl:input message="ns:findProjectByShortCodeRequest"
+				wsaw:Action="urn:findProjectByShortCode" />
+			<wsdl:output message="ns:findProjectByShortCodeResponse"
+				wsaw:Action="urn:findProjectByShortCodeResponse" />
+		</wsdl:operation>
+		<wsdl:operation name="getUserProjects">
+			<wsdl:input message="ns:getUserProjectsRequest"
+				wsaw:Action="urn:getUserProjects" />
+			<wsdl:output message="ns:getUserProjectsResponse"
+				wsaw:Action="urn:getUserProjectsResponse" />
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="ProjectServiceSoap11Binding" type="ns:ProjectServicePortType">
+		<soap:binding transport="http://schemas.xmlsoap.org/soap/http"
+			style="document" />
+		<wsdl:operation name="findByTicket">
+			<soap:operation soapAction="urn:findByTicket" style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findProjectByName">
+			<soap:operation soapAction="urn:findProjectByName"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findProjectByShortCode">
+			<soap:operation soapAction="urn:findProjectByShortCode"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getUserProjects">
+			<soap:operation soapAction="urn:getUserProjects"
+				style="document" />
+			<wsdl:input>
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="ProjectServiceSoap12Binding" type="ns:ProjectServicePortType">
+		<soap12:binding transport="http://schemas.xmlsoap.org/soap/http"
+			style="document" />
+		<wsdl:operation name="findByTicket">
+			<soap12:operation soapAction="urn:findByTicket"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findProjectByName">
+			<soap12:operation soapAction="urn:findProjectByName"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findProjectByShortCode">
+			<soap12:operation soapAction="urn:findProjectByShortCode"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getUserProjects">
+			<soap12:operation soapAction="urn:getUserProjects"
+				style="document" />
+			<wsdl:input>
+				<soap12:body use="literal" />
+			</wsdl:input>
+			<wsdl:output>
+				<soap12:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:binding name="ProjectServiceHttpBinding" type="ns:ProjectServicePortType">
+		<http:binding verb="POST" />
+		<wsdl:operation name="findByTicket">
+			<http:operation location="ProjectService_4180/findByTicket" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="findByTicket" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="findByTicket" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findProjectByName">
+			<http:operation location="ProjectService_4180/findProjectByName" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="findProjectByName" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="findProjectByName" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="findProjectByShortCode">
+			<http:operation location="ProjectService_4180/findProjectByShortCode" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="findProjectByShortCode" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="findProjectByShortCode" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getUserProjects">
+			<http:operation location="ProjectService_4180/getUserProjects" />
+			<wsdl:input>
+				<mime:content type="text/xml" part="getUserProjects" />
+			</wsdl:input>
+			<wsdl:output>
+				<mime:content type="text/xml" part="getUserProjects" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ProjectService_4180">
+		<wsdl:port name="ProjectServiceHttpSoap11Endpoint" binding="ns:ProjectServiceSoap11Binding">
+			<soap:address
+				location="http://localhost/services/ProjectService_4180.ProjectServiceHttpSoap11Endpoint" />
+		</wsdl:port>
+		<wsdl:port name="ProjectServiceHttpSoap12Endpoint" binding="ns:ProjectServiceSoap12Binding">
+			<soap12:address
+				location="http://localhost/services/ProjectService_4180.ProjectServiceHttpSoap12Endpoint" />
+		</wsdl:port>
+		<wsdl:port name="ProjectServiceHttpEndpoint" binding="ns:ProjectServiceHttpBinding">
+			<http:address
+				location="http://localhost/services/ProjectService_4180.ProjectServiceHttpEndpoint" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
