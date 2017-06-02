@@ -1,5 +1,5 @@
-send = False
-retrieve=True
+send = True
+retrieve=False
 if __name__ == "__main__":
 	from glexchange.GLExchange import GLExchange
 	import glexchange.model.ProjectDirectorConfig
