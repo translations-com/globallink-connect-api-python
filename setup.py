@@ -7,10 +7,10 @@ setup(
 	author = 'Translations.com',
 	author_email = 'info@translations.com',
 	url = 'https://github.com/translations-com/globallink-connect-api-python',
-	download_url = 'https://github.com/translations-com/globallink-connect-api-python/archive/4.18.0.zip',
+	download_url = 'https://github.com/translations-com/globallink-connect-api-python/archive/4.18.1.zip',
 	keywords = ['glexchange', 'glx', 'globallink', 'translations.com','transperfect','localization','translation','project director','PD'],
 	install_requires=[
-		'markdown',
+		'suds','datetime','soap',
 	],
 	classifiers = [
 	'Development Status :: 5 - Production/Stable',
