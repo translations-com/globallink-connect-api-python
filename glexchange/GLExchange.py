@@ -6,11 +6,11 @@ import datetime
 import time
 import base64
 
-import model.ProjectDirectorConfig
-import model.Project
-import model.Document
-import model.Submission
-import model.Target
+from .model import ProjectDirectorConfig
+from .model import Project
+from .model import Document
+from .model import Submission
+from .model import Target
 
 class GLExchange:
 	"""Main glexchange manager class"""
@@ -48,20 +48,20 @@ class GLExchange:
 		
 		path = os.path.dirname(os.path.abspath(__file__))
 		if path[0]=='/':
-                        path = path[1:]
+			path = path[1:]
                 
-		self._projectService = Client("file:///"+path+"/wsdl/ProjectService_4180.wsdl")
-		self._projectService.sd[0].service.setlocation(self._connectionConfig.url+"/services/ProjectService_4180")
-		self._targetService = Client("file:///"+path+"/wsdl/TargetService_4180.wsdl")
-		self._targetService.sd[0].service.setlocation(self._connectionConfig.url+"/services/TargetService_4180")
-		self._documentService = Client("file:///"+path+"/wsdl/DocumentService_4180.wsdl")
-		self._documentService.sd[0].service.setlocation(self._connectionConfig.url+"/services/DocumentService_4180")
-		self._submissionService = Client("file:///"+path+"/wsdl/SubmissionService_4180.wsdl")
-		self._submissionService.sd[0].service.setlocation(self._connectionConfig.url+"/services/SubmissionService_4180")
-		self._userProfileService = Client("file:///"+path+"/wsdl/UserProfileService_4180.wsdl")
-		self._userProfileService.sd[0].service.setlocation(self._connectionConfig.url+"/services/UserProfile_4180")
-		self._workflowService = Client("file:///"+path+"/wsdl/WorkflowService_4180.wsdl")
-		self._workflowService.sd[0].service.setlocation(self._connectionConfig.url+"/services/WorkflowService_4180")
+		self._projectService = Client("file:///"+path+"/wsdl/ProjectService_580.wsdl")
+		self._projectService.sd[0].service.setlocation(self._connectionConfig.url+"/services/ProjectService_580")
+		self._targetService = Client("file:///"+path+"/wsdl/TargetService_580.wsdl")
+		self._targetService.sd[0].service.setlocation(self._connectionConfig.url+"/services/TargetService_580")
+		self._documentService = Client("file:///"+path+"/wsdl/DocumentService_580.wsdl")
+		self._documentService.sd[0].service.setlocation(self._connectionConfig.url+"/services/DocumentService_580")
+		self._submissionService = Client("file:///"+path+"/wsdl/SubmissionService_580.wsdl")
+		self._submissionService.sd[0].service.setlocation(self._connectionConfig.url+"/services/SubmissionService_580")
+		self._userProfileService = Client("file:///"+path+"/wsdl/UserProfileService_580.wsdl")
+		self._userProfileService.sd[0].service.setlocation(self._connectionConfig.url+"/services/UserProfile_580")
+		self._workflowService = Client("file:///"+path+"/wsdl/WorkflowService_580.wsdl")
+		self._workflowService.sd[0].service.setlocation(self._connectionConfig.url+"/services/WorkflowService_580")
 		self.__setHeaders()
 		
 	def __setHeaders(self):
@@ -242,18 +242,41 @@ class GLExchange:
 			if not self.isSubmitterValid(submission.project.shortCode, submission.submitter):
 				raise Exception("Specified submitter '"+submission.submitter+"' doesn`t exist")
 		
-		if submission.project.customAttributes != None:
+		if submission.project.customAttributes != None and len(submission.project.customAttributes)>0:
 			for projectCustomAttribute in submission.project.customAttributes:
 				if projectCustomAttribute.mandatory:
 					isSet = False
-					if submission.customAttributes != None:
-						for submissionCustomAttribute in submission.customAttributes:
-							if submissionCustomAttribute.name == projectCustomAttribute.name:
+					if submission.customAttributes != None and len(submission.customAttributes)>0:
+						for key, value in submission.customAttributes.iteritems():
+							if key == projectCustomAttribute.name:
 								isSet = True
 								break
 
 					if not isSet:
 						raise Exception("Mandatory custom field '"+projectCustomAttribute.name+"' is not set")
+
+			if submission.customAttributes != None and len(submission.customAttributes)>0:
+				for key, value in submission.customAttributes.iteritems():
+					isExists = False
+					for projectCustomAttribute in submission.project.customAttributes:
+						if key == projectCustomAttribute.name:
+							isExists = True
+							if projectCustomAttribute.type=="COMBO" and projectCustomAttribute.values != None:
+								comboValueCorrect = False
+								va = projectCustomAttribute.values.split(',')
+								for option in va:
+									if option == value:
+										comboValueCorrect = True
+										break
+
+								if not comboValueCorrect:
+									raise Exception("Value '"+value+"' for custom field '"+key+"' is not allowed. Allowed values:"+projectCustomAttribute.values)
+
+					if not isExists:
+						raise Exception("Custom field '"+key+"' is not allowed in project")
+		else:
+			if submission.customAttributes != None and len(submission.customAttributes)>0:
+				raise Exception("Project doesn't have custom attributes")
 		
 	def cancelDocument (self, documentTicket, locale = None):
 		if locale != None:
@@ -281,7 +304,37 @@ class GLExchange:
 		
 		result = []
 		for externalTarget in cancelledTargets:
-			result.append(model.Target.PDTarget(externalTarget))
+			result.append(Target.PDTarget(externalTarget))
+		
+		return result
+
+	def getCancelledTargetsByProject (self, project, maxResults):
+		cancelledTargets = self._targetService.service.getCanceledTargetsByProjects ( [project.ticket], maxResults )
+		
+		result = []
+		for externalTarget in cancelledTargets:
+			result.append(Target.PDTarget(externalTarget))
+		
+		return result
+
+	def getCancelledTargetsByProjects (self, projects, maxResults):
+		tickets = []
+		for project in projects:
+			tickets.append(project.ticket)
+		
+		cancelledTargets = self._targetService.service.getCanceledTargetsByProjects ( tickets, maxResults )
+		
+		result = []
+		for externalTarget in cancelledTargets:
+			result.append(Target.PDTarget(externalTarget))
+		
+		return result
+
+	def getCancelledTargetsByProjectTickets (self, projectTickets, maxResults):
+		cancelledTargets = self._targetService.service.getCanceledTargetsByProjects ( projectTickets, maxResults )
+		result = []
+		for externalTarget in cancelledTargets:
+			result.append(Target.PDTarget(externalTarget))
 		
 		return result
 		
@@ -289,7 +342,28 @@ class GLExchange:
 		cancelledTargets = self._targetService.service.getCanceledTargetsBySubmissions ( [submissionTicket], maxResults )
 		result = []
 		for externalTarget in cancelledTargets:
-			result.append(model.Target.PDTarget(externalTarget))
+			result.append(Target.PDTarget(externalTarget))
+		return result
+
+	def getCancelledTargetsBySubmissions(self, submissionTickets, maxResults):
+		cancelledTargets = self._targetService.service.getCanceledTargetsBySubmissions ( submissionTickets, maxResults )
+		result = []
+		for externalTarget in cancelledTargets:
+			result.append(Target.PDTarget(externalTarget))
+		return result
+
+	def getCancelledTargetsByDocument(self, documentTicket, maxResults):
+		cancelledTargets = self._targetService.service.getCanceledTargetsByDocuments ( [documentTicket], maxResults )
+		result = []
+		for externalTarget in cancelledTargets:
+			result.append(Target.PDTarget(externalTarget))
+		return result
+
+	def getCancelledTargetsByDocuments(self, documentTickets, maxResults):
+		cancelledTargets = self._targetService.service.getCanceledTargetsByDocuments ( documentTickets, maxResults )
+		result = []
+		for externalTarget in cancelledTargets:
+			result.append(Target.PDTarget(externalTarget))
 		return result
 		
 	def getCompletedTargets (self, maxResults):
@@ -302,7 +376,7 @@ class GLExchange:
 		
 		result = []
 		for externalTarget in completedTargets:
-			result.append(model.Target.PDTarget(externalTarget))
+			result.append(Target.PDTarget(externalTarget))
 		
 		return result
 		
@@ -310,7 +384,23 @@ class GLExchange:
 		completedTargets = self._targetService.service.getCompletedTargetsByProjects ( [project.ticket], maxResults )
 		result = []
 		for externalTarget in completedTargets:
-			result.append(model.Target.PDTarget(externalTarget))
+			result.append(Target.PDTarget(externalTarget))
+		
+		return result
+
+	def getCompletedTargetsByProjects (self, projectTickets, maxResults ):
+		completedTargets = self._targetService.service.getCompletedTargetsByProjects ( projectTickets, maxResults )
+		result = []
+		for externalTarget in completedTargets:
+			result.append(Target.PDTarget(externalTarget))
+		
+		return result
+
+	def getCompletedTargetsByDocuments (self, documentTickets, maxResults ):
+		completedTargets = self._targetService.service.getCompletedTargetsByDocuments ( documentTickets, maxResults )
+		result = []
+		for externalTarget in completedTargets:
+			result.append(Target.PDTarget(externalTarget))
 		
 		return result
 		
@@ -318,19 +408,27 @@ class GLExchange:
 		completedTargets = self._targetService.service.getCompletedTargetsBySubmissions ( [submissionTicket], maxResults )
 		
 		for externalTarget in completedTargets:
-			result.append(model.Target.PDTarget(externalTarget))
+			result.append(Target.PDTarget(externalTarget))
+		
+		return result
+
+	def getCompletedTargetsBySubmissions(self, submissionTickets, maxResults):
+		completedTargets = self._targetService.service.getCompletedTargetsBySubmissions ( submissionTickets, maxResults )
+		
+		for externalTarget in completedTargets:
+			result.append(Target.PDTarget(externalTarget))
 		
 		return result
 		
 	def getProject(self, shortCode):
 		project = self._projectService.service.findProjectByShortCode(shortCode)
-		return model.Project.PDProject(project)
+		return Project.PDProject(project)
 		
 	def getProjects(self, includeSubProjects):
 		projects = []
 		response = self._projectService.service.getUserProjects(includeSubProjects)
 		for project in response:
-			projects.append(model.Project.PDProject(project))
+			projects.append(Project.PDProject(project))
 			
 		return projects
 		
@@ -338,6 +436,20 @@ class GLExchange:
 		submission = self._submissionService.service.findByTicket ( submissionTicket )
 		if submission != None:
 			return submission.submissionInfo.name
+		else:
+			raise Exception("Invalid submission ticket")
+
+	def getSubmissionStatus (self, submissionTicket):
+		submission = self._submissionService.service.findByTicket ( submissionTicket )
+		if submission != None:
+			return submission.status
+		else:
+			raise Exception("Invalid submission ticket")
+
+	def getSubmissionId (self, submissionTicket):
+		submission = self._submissionService.service.findByTicket ( submissionTicket )
+		if submission != None:
+			return submission.submissionId
 		else:
 			raise Exception("Invalid submission ticket")
 		
@@ -351,7 +463,7 @@ class GLExchange:
 		submissions = []
 		creatingSubmissions = self._submissionService.service.findCreatingSubmissionsByProjectShortCode(project.shortCode)
 		for creatingSubmission in creatingSubmissions:
-			sub = model.Submission.PDSubmission()
+			sub = Submission.PDSubmission()
 			sub.ticket = creatingSubmission.ticket
 			sub.name = creatingSubmission.submissionInfo.name
 			submissions.append(sub)
@@ -414,8 +526,9 @@ class GLExchange:
 		
 		documentInfo = self.__getDocumentInfo ( document )
 		resourceInfo = self.__getDocumentResourceInfo(document)
-		
-		documentTicket = self._documentService.service.submitDocumentWithBinaryResource(documentInfo, resourceInfo, base64.b64encode(document.data))
+		data = base64.b64encode(document.data.encode("utf-8")).decode("utf-8")
+
+		documentTicket = self._documentService.service.submitDocumentWithBinaryResource(documentInfo, resourceInfo, data)
 		if documentTicket != None:
 			self._submission.ticket = documentTicket.submissionTicket
 			
